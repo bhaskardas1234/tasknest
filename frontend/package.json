@@ -1,0 +1,53 @@
+{
+  "name": "qverse",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@sentry/browser": "^9.1.0",
+    "@sentry/react": "^9.1.0",
+    "cra-template": "1.2.0",
+    "highlight.js": "^11.11.1",
+    "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.10.2",
+    "jspdf": "^2.5.2",
+    "lucide-react": "^0.479.0",
+    "mitt": "^3.0.1",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.0.0",
+    "react-apexcharts": "^1.7.0",
+    "react-calendar": "^5.1.0",
+    "react-dom": "^19.0.0",
+    "react-gauge-chart": "^0.5.1",
+    "react-icons": "^5.5.0",
+    "react-modal": "^3.16.3",
+    "react-router-dom": "^7.0.2",
+    "react-scripts": "^5.0.1",
+    "react-share": "^5.2.2",
+    "react-toastify": "^11.0.3",
+    "web-vitals": "^4.2.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+div,
+button,
+a {
+  -webkit-tap-highlight-color: transparent; /* For iOS Safari and Chrome on Android */
+}
+
+:root {
+  --bg-header: #020202;
+  --parent-bg-primary: #bebebe;
+  --bg-primary: #0b0b0b;
+  --bg-questions-comp: #272727;
+  --text-primary: #ffffff;
+  --text-heading: #e2e2e2;
+  --tab-bg: #4c4c4c;
+  --tab-select: #2b2b2b;
+  --time-background: rgba(190, 190, 190, 0.7);
+  --range-color: #77eb7c;
+  --option-border: #a6a6a6;
+  --bg-bottom: #0c0c0c;
+  --submit-border: #ffc727;
+  --see-more: #807728;
+  --select-option-border: #d0c34b;
+  --hint-bg: #d9d9d9;
+  --hint-body: #131313;
+  --hint-heading: #fff;
+  --hint-name: #afafaf;
+  --htnt-seemore: #dc9e42;
+  --htnt-b-color: #2a2a2a;
+  --border-3d: #8c6800;
+  --red: #ef3030;
+  --color-unseen: #ff5733;
+  --color-unattempted: #64b5f6;
+  --color-attempted: #4caf50;
+  --color-current: #fff59e;
+  --text-q-tab: #d4d4d4;
+  --bg-q-tab: #606060;
+  --bg-text-instruction-container: #161616;
+
+  /* Details page */
+  --range-correct: #00a851;
+  --range-partially-correct: #ffc727;
+  --range-incorrect: #e3401f;
+  --range-skipped: #a2a0a0;
+  --bg-secondary: #0c0c0c;
+  --text-condition: rgba(242, 242, 242, 0.8);
+  --text-secondary: #242424;
+  --text-head: #f2f2f2;
+  --range-strength: #77c72b;
+  --range-can-do-better: #5c85ff;
+  --range-blindspot: #e3401f;
+  --bg-dark: #000000;
+  --text-blindspot: #d44325;
+}
