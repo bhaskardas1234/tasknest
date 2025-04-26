@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from fastapi_jwt_auth import AuthJWT
 from settings import SessionLocal, redis_client
-from models import User
+from models import User,Category,UserCategory
 from schemas import RegisterUser, LoginUser
 from service.authService import create_user
 
@@ -28,17 +28,31 @@ def register(user: RegisterUser, Authorize: AuthJWT = Depends(), db: Session = D
             status_code=400
         )
 
+    # Create new user
     new_user = create_user(db, user)
 
+    # Fetch default categories
+    default_categories = db.query(Category).filter(
+        Category.category_name.in_(["work", "personal", "wishlist", "event", "birthday", "dailyplan"])
+    ).all()
+
+    # Map each category to the new user
+    for category in default_categories:
+        db.add(UserCategory(user_id=new_user.id, category_id=category.category_id))
+
+    db.commit()
+
+    # Generate access token
     access_token = Authorize.create_access_token(
         subject=user.email,
-        expires_time=timedelta(days=30)  # 30-day token
+        expires_time=timedelta(days=30)
     )
 
     return JSONResponse(
         content={"status": "success", "access_token": access_token},
         status_code=201
     )
+
 
 # ---------------------- Login ----------------------
 @auth.post("/login")
@@ -73,14 +87,3 @@ def logout(Authorize: AuthJWT = Depends()):
 
     return {"msg": "Successfully logged out"}
 
-# ---------------------- Protect Route Example ----------------------
-@auth.get("/protected")
-def protected(Authorize: AuthJWT = Depends()):
-    Authorize.jwt_required()
-
-    jti = Authorize.get_raw_jwt()['jti']
-    if redis_client.get(f"blacklist:{jti}"):
-        raise HTTPException(status_code=401, detail="Token has been revoked")
-
-    current_user = Authorize.get_jwt_subject()
-    return {"message": f"Hello {current_user}, you're authorized!"}

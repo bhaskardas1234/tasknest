@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 from controller.authController import auth as auth_router
+from controller.dashBoardController import dashBoard as dashBoard_router
 
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_jwt_auth import AuthJWT
@@ -31,6 +32,7 @@ def get_config():
 
 # Registering Routers (Equivalent to Flask Blueprints)
 app.include_router(auth_router)
+app.include_router(dashBoard_router)
 
 
 

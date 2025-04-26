@@ -1,6 +1,7 @@
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
+from datetime import datetime
 
 class RegisterUser(BaseModel):
     username: str
@@ -19,4 +20,21 @@ class RegisterUser(BaseModel):
         orm_mode = True
 class LoginUser(BaseModel):
     email:EmailStr
-    password:str
+    password: Optional[str] = None
+class Category(BaseModel):
+    category_name: str
+    
+class TaskSchema(BaseModel):
+    task_title: str
+    deadline: Optional[datetime] = None
+    priority: Optional[str] = 'Medium'
+    description: Optional[str] = None
+    status: Optional[str] = 'Pending'
+    starred: Optional[bool] = False
+    reminder: Optional[datetime] = None
+    category_id: Optional[int] = None
+
+    class Config:
+        orm_mode = True
+class StatusUpdate(BaseModel):
+    status: str
