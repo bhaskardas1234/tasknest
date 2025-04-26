@@ -1,0 +1,142 @@
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+.start-container {
+  background-color: #000000;
+  height: 100vh;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.start {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  /* margin-top: 20px; */
+  height: 100%;
+}
+
+.animation {
+  height: 530px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  overflow: hidden;
+  position: relative;
+}
+
+.animation-img {
+  height: 550px;
+}
+
+.animation::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 50%; /* Darkness starts from the middle */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.8) 60%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  pointer-events: none; /* Ensure it doesn’t block interactions */
+}
+
+.dive {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* box-shadow: 20px -50px 70px 140px black; */
+}
+.dive-p {
+  width: 75%;
+  color: var(--All-White, #fff);
+  text-align: center;
+  font-family: Geist, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-top: 20px;
+}
+
+.test-start {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  /* margin-bottom: 100px; */
+}
+.test-start-btn {
+  width: 75%;
+  height: 50px;
+  border: 2px solid #ffc727;
+  box-shadow: 2.5px 2.5px #8c6800;
+  background-color: #000000;
+  color: #fff;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.highlight {
+  margin-left: 7px;
+  color: var(--All-White, #fff);
+  text-align: center;
+  font-family: ABeeZee;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: inline-block;
+  position: relative;
+  animation: slide-up 2s ease-in-out infinite;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .start-container {
+    width: 100%;
+  }
+}

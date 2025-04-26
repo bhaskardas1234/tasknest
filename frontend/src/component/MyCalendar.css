@@ -1,0 +1,73 @@
+.react-calendar {
+  border: none;
+  border-radius: 12px;
+  padding: 20px;
+  background: linear-gradient(145deg, #f2f6ff, #dcebff);
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.react-calendar__tile {
+  /* padding: 12px;
+  margin: 4px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease; */
+  padding: 12px;
+  margin: 4px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
+  box-sizing: border-box; /* This prevents height change when adding border */
+}
+
+/* Customize navigation bar (month/year selectors) */
+.react-calendar__navigation {
+  margin-bottom: 15px;
+}
+
+.react-calendar__navigation button {
+  background: transparent;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #3a516a;
+}
+
+.highlight-today {
+  background-color: #a8e6a2 !important;
+  color: #1e441e !important;
+  box-shadow: inset -2px -2px 4px #f0f8ff, inset 2px 2px 6px #4ec320,
+    0 6px 10px rgba(116, 52, 176, 0.2) !important;
+}
+
+/* Today (selected) — this must override everything */
+.highlight-today-selected {
+  background-color: #a8e6a2 !important;
+  color: #1e441e !important;
+  box-shadow: inset -2px -2px 4px #f0f8ff, inset 2px 2px 6px #4ec320,
+    0 6px 10px rgba(116, 52, 176, 0.2) !important;
+}
+
+/* Selected (not today) */
+.highlight-selected {
+  background: linear-gradient(145deg, #889eda, #4a6dcd) !important;
+  color: white !important;
+  box-shadow: inset -2px -2px 4px #f0f8ff, inset 2px 2px 6px #7dc1f2,
+    0 6px 10px rgba(116, 52, 176, 0.2);
+}
+
+/* Hover effect — only apply to normal tiles */
+.react-calendar__tile:not(.highlight-selected):not(.highlight-today):not(
+    .highlight-today-selected
+  ):hover {
+  cursor: pointer;
+  background: linear-gradient(145deg, #f2f6ff, #dcebff);
+  border: 2px solid #7cb0d4;
+}
+
+.calendarWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center; /* center vertically */
+  height: 100%; /* take all available space */
+}

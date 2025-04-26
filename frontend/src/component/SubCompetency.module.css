@@ -1,0 +1,52 @@
+.progress-bar-container {
+  margin-bottom: 10px;
+}
+
+.progress {
+  border-radius: 5px;
+  overflow: hidden;
+  height: 20px;
+  position: relative;
+  /* added for the performance progress */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.progress-fill {
+  height: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 5px;
+  border-radius: 2px;
+}
+
+.progress-percentage {
+  /* color: var(--text-condition); */
+  z-index: 1;
+  color: var(--text-secondary);
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.subcompetency-topic {
+  color: rgba(242, 242, 242, 0.6);
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  width: 35%;
+}
+
+.subcompetency-topic-p {
+  text-align: right;
+}
+
+.progress-fill-parent {
+  background-color: #343434;
+  width: 65%;
+  border-radius: 2px;
+}
