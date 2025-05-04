@@ -76,7 +76,7 @@ def get_user_categories(db: Session = Depends(get_db), user_email=Depends(author
 
 
 
-
+# add the category
 @dashBoard.post("/category")
 def add_category(data: CategorySchema, db: Session = Depends(get_db), user_email=Depends(authorize_user)):
     # Step 1: Check if category exists
@@ -115,6 +115,46 @@ def add_category(data: CategorySchema, db: Session = Depends(get_db), user_email
         content={"message": "Category created and linked to user", "category": category.category_name},
         status_code=200
     )
+
+
+#  delete  onecatagory
+@dashBoard.delete("/category")
+def delete_category(data: CategorySchema, db: Session = Depends(get_db), user_email=Depends(authorize_user)):
+    # Step 1: Get category
+    category = db.query(Category).filter(Category.category_name == data.category_name).first()
+    if not category:
+        raise HTTPException(status_code=404, detail="Category not found")
+
+    # Step 2: Get user
+    user = db.query(User).filter(User.email == user_email).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    # Step 3: Find user-category mapping
+    mapping = db.query(UserCategory).filter(
+        UserCategory.user_id == user.id,
+        UserCategory.category_id == category.category_id
+    ).first()
+
+    if not mapping:
+        raise HTTPException(status_code=404, detail="Category not linked to user")
+
+    # Step 4: Delete the mapping
+    db.delete(mapping)
+    db.commit()
+
+    # Step 5 (Optional): Delete the category if no one else uses it
+    remaining_links = db.query(UserCategory).filter(UserCategory.category_id == category.category_id).count()
+    if remaining_links == 0:
+        db.delete(category)
+        db.commit()
+
+    return JSONResponse(
+        content={"message": "Category unlinked from user", "category": category.category_name},
+        status_code=200
+    )
+
+
 
 
 # create the new task(add)

@@ -18,6 +18,8 @@ class RegisterUser(BaseModel):
 
     class Config:
         orm_mode = True
+class GoogleAuth(BaseModel):
+    token: str  # This is the Google ID token sent from frontend
 class LoginUser(BaseModel):
     email:EmailStr
     password: Optional[str] = None
