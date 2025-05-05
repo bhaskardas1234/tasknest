@@ -1,0 +1,20 @@
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Mask group">
+<mask id="mask0_998_967" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="22" height="22">
+<g id="Group">
+<g id="Group_2">
+<path id="Vector" d="M10.4102 3.3877V9.3877C10.4102 10.4927 8.39516 11.3877 5.91016 11.3877C3.42516 11.3877 1.41016 10.4927 1.41016 9.3877V3.3877" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M10.4102 6.3877C10.4102 7.4927 8.39516 8.3877 5.91016 8.3877C3.42516 8.3877 1.41016 7.4927 1.41016 6.3877" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M10.4102 3.3877C10.4102 4.4927 8.39516 5.3877 5.91016 5.3877C3.42516 5.3877 1.41016 4.4927 1.41016 3.3877C1.41016 2.2827 3.42516 1.3877 5.91016 1.3877C8.39516 1.3877 10.4102 2.2827 10.4102 3.3877Z" fill="#555555" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M21.4102 13.3877V19.3877C21.4102 20.4927 19.3952 21.3877 16.9102 21.3877C14.4252 21.3877 12.4102 20.4927 12.4102 19.3877V13.3877" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_5" d="M21.4102 16.3877C21.4102 17.4927 19.3952 18.3877 16.9102 18.3877C14.4252 18.3877 12.4102 17.4927 12.4102 16.3877" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_6" d="M21.4102 13.3877C21.4102 14.4927 19.3952 15.3877 16.9102 15.3877C14.4252 15.3877 12.4102 14.4927 12.4102 13.3877C12.4102 12.2827 14.4252 11.3877 16.9102 11.3877C19.3952 11.3877 21.4102 12.2827 21.4102 13.3877Z" fill="#555555" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_7" d="M15.4102 2.3877H18.4102C18.9406 2.3877 19.4493 2.59841 19.8244 2.97348C20.1994 3.34855 20.4102 3.85726 20.4102 4.3877V7.3877M7.41016 20.3877H4.41016C3.87972 20.3877 3.37102 20.177 2.99594 19.8019C2.62087 19.4268 2.41016 18.9181 2.41016 18.3877V15.3877" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</mask>
+<g mask="url(#mask0_998_967)">
+<path id="Vector_8" d="M-0.589844 -0.612305H23.4102V23.3877H-0.589844V-0.612305Z" fill="#F2F2F2" fill-opacity="0.8"/>
+</g>
+</g>
+</svg>

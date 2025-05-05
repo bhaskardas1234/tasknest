@@ -46,8 +46,14 @@ const RegistrationForm = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            type="password"
+            type="email"
             placeholder="Email"
+            className={styles.input}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
             className={styles.input}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -58,7 +64,7 @@ const RegistrationForm = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            type="password"
+            type="text"
             placeholder="Institution/Organization"
             className={styles.input}
             onChange={(e) => setPassword(e.target.value)}
@@ -70,7 +76,7 @@ const RegistrationForm = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            type="password"
+            type="text"
             placeholder="LinkedIn URL"
             className={styles.input}
             onChange={(e) => setPassword(e.target.value)}

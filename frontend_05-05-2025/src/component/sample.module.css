@@ -1,0 +1,200 @@
+:root {
+  --blue: #313e63;
+  --sky: #0ea5e9;
+  --emerald: #10b981;
+  --gray-bg: #f9fafb;
+  --gray-surface: #f3f4f6;
+  --white: #ffffff;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --border: #e5e7eb;
+  --text: #cbd5e1;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--gray-bg);
+  font-family: "Inter", sans-serif;
+  color: var(--text-dark);
+}
+
+/* Header */
+.topbar {
+  background-color: var(--blue);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userText {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.logoutButton {
+  background-color: var(--sky);
+  color: white;
+  font-weight: 500;
+  padding: 0.45rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #0284c7;
+}
+
+/* Layout */
+.main {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background-color: var(--white);
+  padding: 2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.nav a {
+  color: #cbd5e1;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  background-color: #f5f7f8;
+  padding: 2.5rem 3rem;
+}
+
+.heading {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: var(--blue);
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.taskItem {
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.taskItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+.doneButton {
+  background-color: var(--emerald);
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.doneButton:hover {
+  background-color: #059669;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--blue);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  /* border-top: 1px solid var(--border); */
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--blue);
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav a:hover {
+  background-color: var(--text);
+  color: var(--blue);
+}
+
+.taskText {
+  font-size: 1rem;
+  flex: 1;
+  color: var(--text-dark);
+}
+
+.taskActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.iconButton:hover {
+  color: var(--sky);
+}

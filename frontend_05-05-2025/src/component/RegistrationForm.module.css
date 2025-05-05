@@ -1,0 +1,128 @@
+.loginContainer {
+  background-color: var(--text);
+  border-radius: 12px;
+  padding: 30px 25px;
+  width: 400px;
+  margin: 80px auto;
+  /* padding: 30px; */
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  cursor: default; /* Ensure click inside the modal doesn't close it */
+  text-align: center;
+  flex: 1;
+}
+
+.loginTitle {
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: var(--blue);
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background-color: var(--white);
+  font-size: 0.95rem;
+  color: var(--blue);
+}
+
+.input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.loginButton {
+  flex: 1;
+  padding: 10px 16px;
+  margin: 0 4px;
+  background-color: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loginButton:hover {
+  transform: scale(1.08);
+}
+
+.divider {
+  margin: 8px 0;
+  color: #817c7c;
+  font-size: 13px;
+}
+
+.googleButton {
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: box-shadow 0.3s ease;
+}
+
+.googleButton:hover {
+  box-shadow: 0 0 0 2px #ddd;
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.topmenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--blue);
+  padding: 10px 25px;
+}
+
+.logo {
+  margin-left: 24px;
+  height: 60px;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #e6f6ff;
+  font-weight: bold;
+}
+
+.footer {
+  background-color: #7cb0d4;
+  padding: 15px 25px;
+  text-align: center;
+  color: #e6f6ff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border-bottom: 2px solid #e6f6ff; */
+}
+
+/* App.module.css or global layout CSS */
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

@@ -1,0 +1,867 @@
+* {
+  font-family: cursive;
+}
+
+.dashboardContainer {
+  display: flex;
+  /* height: 100vh; */
+  /* font-family: "Segoe UI", sans-serif; */
+  /* background-color: #fff6f9; */
+
+  /* display: flex; */
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--gray-bg);
+  font-family: "Inter", sans-serif;
+  color: var(--text-dark);
+}
+
+.mainContainer {
+  display: flex;
+  flex: 1;
+}
+
+/* Side navbar */
+.sidenav {
+  width: 220px;
+  background-color: var(--white);
+  color: var(--blue);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  transition: width 0.3s ease;
+}
+
+.collapsed {
+  width: 60px;
+}
+
+.collapsed .navItem {
+  justify-content: center;
+  padding: 10px;
+}
+
+/* Increase icon size in collapsed mode */
+.collapsed .navItem svg {
+  font-size: 2rem; /* Increase the icon size */
+  padding: 8px;
+}
+
+/* Collapse Button */
+.collapseBtn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  color: #d36c6c;
+  align-self: flex-end;
+}
+
+.noevents {
+  background-color: #dfdfdf;
+  width: 350px;
+  height: 116px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  color: grey;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+.nodeadline {
+  background-color: #dfdfdf;
+  width: 90%;
+  height: 185px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  color: grey;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+/* Nav item */
+.navItem {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  /* margin-bottom: 12px; */
+  cursor: pointer;
+  color: var(--blue);
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navItem:hover {
+  background-color: var(--text);
+  color: var(--blue);
+}
+
+/* Icon styling */
+.navItem svg {
+  font-size: xx-large; /* Base icon size */
+  padding: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Icon size and alignment in collapsed mode */
+.collapsed .navItem svg {
+  font-size: xx-large; /* Larger icon when collapsed */
+  padding: 1px;
+}
+
+/* Hide text when collapsed */
+.collapsed .navItem span {
+  display: none;
+}
+
+.navItem span {
+  margin-left: 12px;
+  font-size: 1rem;
+}
+
+/* Main content styling */
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top menu */
+.topmenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--blue);
+  color: var(--text);
+  padding: 10px 25px;
+  border-bottom: 2px solid #e6f6ff;
+}
+
+.logo {
+  margin-left: 24px;
+  height: 60px;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #e6f6ff;
+  font-weight: bold;
+}
+
+.menuItems {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.menuItem {
+  font-size: 15px;
+  color: var(--text);
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.menuItem:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #e6f6ff;
+}
+
+/* General icon styling for top bar and menu items */
+.icon,
+.addIcon,
+.topIcons svg,
+.menuItem svg {
+  font-size: 1.6rem; /* Adjust icon size */
+  background-color: var(--text);
+  color: var(--blue);
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for top bar and menu bar icons */
+.icon:hover,
+.addIcon:hover,
+.topIcons svg:hover,
+.menuItem svg:hover {
+  /* background: linear-gradient(to bottom, #fff 0%, #e6f6ff 100%); */
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+/* Styling for the + icon in the top menu */
+.addIcon {
+  font-size: 2rem;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.topIcons {
+  display: flex;
+  gap: 10px; /* Increased gap between the icons */
+  align-items: center;
+}
+
+/* Profile and notification icons styling */
+.topIcons svg {
+  font-size: 2rem;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+/* Additional effect for active state (optional) */
+.icon:active,
+.addIcon:active,
+.topIcons svg:active,
+.menuItem svg:active {
+  transform: scale(0.95); /* Slight shrink effect when clicked */
+  box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.5),
+    3px 5px 10px rgba(52, 114, 176, 0.4);
+}
+
+/* Page content */
+.pageContent {
+  padding: 20px;
+  background-color: var(--bgcolor);
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Hamburger button for sidebar toggle */
+.hamburger {
+  background: none;
+  border: none;
+  color: var(--blue);
+  font-size: 1.4rem;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+
+.hamburger:hover {
+  color: var(--sky);
+}
+
+.activeMenuItem {
+  background: var(--sky);
+  color: var(--white);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 12px;
+  padding: 0.45rem 1rem;
+  transform: scale(1.05);
+}
+
+.floatingAddBtn {
+  position: fixed;
+  bottom: 72px;
+  right: 30px;
+  width: 64px;
+  height: 64px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.floatingAddBtn:hover {
+  transform: scale(1.1);
+  background-color: var(--blue);
+}
+
+.floatingAddBtn:active {
+  transform: scale(0.95);
+  box-shadow: inset 2px 2px 6px rgba(255, 255, 255, 0.6),
+    inset -2px -2px 6px #72b4ff;
+}
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+/* Popup Modal */
+.popupModal {
+  background-color: var(--text);
+  border-radius: 12px;
+  padding: 30px 25px;
+  width: 340px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  cursor: default; /* Ensure click inside the modal doesn't close it */
+}
+
+/* Popup Title */
+.popupTitle {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--blue);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Popup Input, Textarea, and Select */
+.popupInput,
+.popupTextarea,
+.popupInput select {
+  padding: 12px 15px;
+  border-radius: 14px;
+  border: none;
+  outline: none;
+  background-color: var(--white);
+  font-size: 0.95rem;
+  color: #3f7899;
+}
+
+.popupTextarea {
+  height: 80px;
+}
+
+.popupInput select {
+  background: linear-gradient(145deg, #f2f7ff, #d1e5f1);
+  color: #3f7d99;
+}
+
+/* Popup Buttons */
+.popupButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* Button Styles */
+.popupBtn {
+  flex: 1;
+  padding: 10px 16px;
+  margin: 0 4px;
+  background-color: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.popupBtn:hover {
+  transform: scale(1.05);
+  background-color: var(--sky);
+}
+
+.popupBtn.cancel {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.popupBtn.cancel:hover {
+  background-color: var(--sky);
+}
+
+.taskListTitle {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+
+.calendarTaskListTitle {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--blue);
+  width: max-content;
+}
+
+.taskList {
+  /* list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+  margin-bottom: 20px;
+  gap: 1.2rem; */
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.taskItem {
+  /* padding: 16px 20px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.7),
+    inset 2px 2px 6px rgba(0, 0, 0, 0.05), 3px 6px 14px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(5px);
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding-top: 32px; */
+
+  position: relative;
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+.taskItem:hover {
+  transform: translateY(-3px);
+}
+.deadlineTaskItem {
+  /* padding: 16px 20px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+  margin-top: 18px;
+  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.7),
+    inset 2px 2px 6px rgba(0, 0, 0, 0.05), 3px 6px 14px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(5px);
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding-top: 32px;
+  background: linear-gradient(to bottom, #eaf3f9, #ffffff);
+  width: 100%;
+  min-width: 600px; */
+
+  position: relative;
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+  display: flex;
+  min-width: 600px;
+  margin-bottom: 18px;
+  margin-top: 18px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.deadlineTaskItem:hover {
+  transform: translateY(-3px);
+}
+
+.eventItem {
+  padding: 16px 20px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+  margin-top: 18px;
+  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.7),
+    inset 2px 2px 6px rgba(0, 0, 0, 0.05), 3px 6px 14px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(5px);
+  color: #1eb41e;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  /* padding-top: 32px; */
+  background: linear-gradient(to bottom, #ebf9ea, #ffffff);
+  width: 95%;
+  /* min-width: 600px; */
+}
+
+.eventItem:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+/* .deadlineTaskItem {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  text-align: center;
+} */
+
+/* .deadlineTaskCategory {
+  font-size: 0.9rem;
+  font-weight: 100;
+  background-color: #f9f9f9;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  background-color: rgb(215 240 255);
+} */
+
+.deadlineTaskCategory {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #555;
+  background-color: #e0e0e0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* Category-specific pastel bubble backgrounds */
+/* .completed {
+  background-color: rgb(108, 246, 108);
+}
+
+.overdue {
+  background-color: rgb(246, 117, 108);
+}
+
+.pending {
+  background-color: rgb(200, 199, 199);
+} */
+
+/* .taskWishlist {
+  background: linear-gradient(145deg, #95ffbe, #c8ffe1);
+} */
+
+.taskDefault {
+  background-color: var(--white);
+}
+
+/* Optional: Style task headings for fun */
+.taskItem h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.taskItem p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.taskActions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 12px;
+  gap: 16px;
+}
+
+.iconBtn {
+  font-size: 18px;
+  color: lightslategrey;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.iconBtn:hover {
+  color: #5592bb;
+  transform: scale(1.1);
+}
+
+.starred {
+  color: gold !important;
+}
+
+.completed {
+  color: green !important;
+}
+
+.completedLabel {
+  color: green;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.statusIndicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center; /* Vertically center icon + text */
+  gap: 6px; /* Space between icon and text */
+  font-size: 0.9rem;
+  font-weight: 100;
+  background-color: #f9f9f9;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+.statusIcon {
+  font-size: 1rem;
+  vertical-align: middle;
+  line-height: 1;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.completedStatus {
+  color: green;
+  /* background-color: rgb(108, 246, 108); */
+}
+
+.pendingStatus {
+  /* background-color: rgb(200, 199, 199); */
+  color: #727171;
+}
+
+.overdueStatus {
+  /* background-color: rgb(246, 117, 108); */
+  color: red;
+}
+
+.profilePopup {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: var(--text);
+  backdrop-filter: blur(5px);
+  border-radius: 12px;
+  padding: 10px 10px;
+  z-index: 10;
+  color: #333;
+  min-width: 160px;
+}
+
+.profilePopup p {
+  margin: 5px 0;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 8px;
+}
+
+.profilePopup p:hover {
+  background-color: #f5f7f8;
+  color: black;
+  border-radius: 8px;
+  padding-left: 4px;
+  transform: scale(1.03);
+}
+
+.profileWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* .menuItemsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  overflow: hidden;
+  max-width: 60%;
+}
+
+.menuItems {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.arrowIcon {
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #206294;
+  transition: transform 0.2s ease;
+}
+
+.arrowIcon:hover {
+  transform: scale(1.2);
+} */
+
+/* .menuItemsWrapper {
+  display: flex;
+  align-items: center;
+  max-width: 60%;
+  overflow: hidden;
+  gap: 8px;
+}
+
+.menuItems {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.menuItems::-webkit-scrollbar {
+  display: none;
+}
+
+.arrowIcon {
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #3f7899;
+  transition: transform 0.2s ease;
+}
+
+.arrowIcon:hover {
+  transform: scale(1.2);
+} */
+
+.menuItemsWrapper {
+  display: flex;
+  align-items: center;
+  max-width: 60%;
+  overflow: hidden;
+  gap: 8px;
+  height: 100%;
+}
+
+.menuItems {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex: 1;
+}
+
+.menuItems::-webkit-scrollbar {
+  display: none;
+}
+
+/* .addIcon {
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #3f7899;
+  transition: transform 0.2s ease;
+  margin: 0 6px;
+}
+
+.addIcon:hover {
+  transform: rotate(90deg) scale(1.2);
+} */
+
+.arrowIcon {
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text);
+  transition: transform 0.2s ease;
+}
+
+.arrowIcon:hover {
+  transform: scale(1.2);
+}
+
+.footer {
+  background-color: #7cb0d4;
+  padding: 15px 25px;
+  text-align: center;
+  color: #e6f6ff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  /* margin-top: auto; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border-bottom: 2px solid #e6f6ff; */
+}
+
+.toggleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.toggleSwitch {
+  width: 40px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #999999;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggleSwitch.on {
+  background-color: #4caf50;
+}
+
+.toggleHandle {
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: left 0.3s ease;
+}
+
+.toggleSwitch.on .toggleHandle {
+  left: 21px;
+}
+
+.calendarDeadline {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+}
+
+.calendarDeadline > * {
+  width: 50%;
+}
+
+/*Deadline*/
+
+.deadlineTasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Keeps title centered */
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: transparent;
+  border-radius: 12px;
+  width: 100%;
+}
+.deadlineTasks ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.deadlineTasks li {
+  background-color: #f2f2f2;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+}

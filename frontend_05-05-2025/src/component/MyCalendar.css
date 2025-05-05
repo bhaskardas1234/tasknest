@@ -1,0 +1,103 @@
+.react-calendar {
+  border: none;
+  border-radius: 12px;
+  padding: 20px;
+  width: 400px;
+  background-color: var(--calendarbg) !important;
+}
+
+.react-calendar__tile {
+  /* padding: 12px;
+  margin: 4px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease; */
+  padding: 12px;
+  margin: 4px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: var(--blue);
+  transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
+  box-sizing: border-box; /* This prevents height change when adding border */
+}
+
+/* Customize navigation bar (month/year selectors) */
+.react-calendar__navigation {
+  margin-bottom: 15px;
+}
+
+/* Add this to your stylesheet */
+.react-calendar__navigation__label {
+  font-size: large;
+  font-weight: bold;
+  color: var(--blue); /* Your custom color */
+}
+
+.react-calendar__navigation__label:hover {
+  border-radius: 12px;
+  background-color: #b2c0d0 !important;
+}
+
+/* Style both arrows */
+.react-calendar__navigation__arrow {
+  font-size: 1.5rem;
+  color: var(--blue);
+  background-color: transparent;
+  border: none;
+}
+
+/* Hover effect */
+.react-calendar__navigation__arrow:hover {
+  background-color: #b2c0d0 !important;
+  border-radius: 12px;
+  /* color: #00796b; */
+  cursor: pointer;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  font-weight: bold !important;
+  color: var(--blue);
+  text-transform: uppercase;
+  padding: 8px 0;
+  text-decoration: none !important;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none; /* Removes dotted underline */
+  border: none; /* Removes default border */
+  cursor: default; /* Optional: prevents "help" cursor */
+}
+
+.highlight-today {
+  background-color: var(--sky) !important;
+  color: var(--white) !important;
+}
+
+/* Today (selected) — this must override everything */
+.highlight-today-selected {
+  background-color: var(--sky) !important;
+  color: var(--white) !important;
+}
+
+/* Selected (not today) */
+.highlight-selected {
+  background: #a0a4ac !important;
+  color: white !important;
+}
+
+/* Hover effect — only apply to normal tiles */
+.react-calendar__tile:not(.highlight-selected):not(.highlight-today):not(
+    .highlight-today-selected
+  ):hover {
+  cursor: pointer;
+  background-color: var(--text);
+  border: 2px solid #a0a4ac;
+}
+
+.calendarWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center; /* center vertically */
+  height: 100%; /* take all available space */
+}

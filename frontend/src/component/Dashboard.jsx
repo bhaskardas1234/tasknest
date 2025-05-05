@@ -14,6 +14,7 @@ import {
   FaPlus,
   FaChevronLeft,
   FaChevronRight,
+  FaExclamationTriangle,
 } from "react-icons/fa";
 import { FaEdit, FaTrash, FaCheckCircle } from "react-icons/fa";
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -27,7 +28,8 @@ const SideNav = ({
   setActiveView,
 }) => {
   const navItems = [
-    { icon: <FaStar />, label: "Star Tasks" },
+    { icon: <FaStar />, label: "Starred" },
+    { icon: <FaExclamationTriangle />, label: "Urgent Tasks" },
     { icon: <FaCalendarAlt />, label: "Calendar" },
     { icon: <FaPalette />, label: "Theme" },
     { icon: <FaCommentDots />, label: "Feedback" },
@@ -176,6 +178,7 @@ const Dashboard = () => {
   const [showCategoryPopup, setShowCategoryPopup] = useState(false);
   const [newCategoryType, setNewCategoryType] = useState("");
   const [customCategory, setCustomCategory] = useState("");
+  // const [priority, setPriority] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const [activeView, setActiveView] = useState("Task List"); // 'tasks', 'calendar', 'starred'
@@ -191,6 +194,7 @@ const Dashboard = () => {
       description: taskDescription,
       isStarred: false,
       completed: false,
+      priority: taskPriority,
     };
 
     console.log(newTask);
@@ -211,6 +215,7 @@ const Dashboard = () => {
       setTaskTitle("");
       setTaskDeadline("");
       setTaskDescription("");
+      setTaskPriority("");
       setTasks((prevTasks) => [...prevTasks, newTask]);
     }
 
@@ -393,7 +398,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          {activeView === "Star Tasks" && (
+          {activeView === "Starred" && (
             <>
               <h2 className={styles.taskListTitle}>Starred Tasks</h2>
               {tasks.filter((task) => task.isStarred).length === 0 ? (
@@ -402,6 +407,110 @@ const Dashboard = () => {
                 <ul className={styles.taskList}>
                   {tasks
                     .filter((task) => task.isStarred)
+                    .map((task, idx) => {
+                      let bgColorStatus = "rgb(218, 218, 218)";
+                      if (task.completed) bgColorStatus = "rgb(192, 255, 192)";
+                      else if (isOverdue(task))
+                        bgColorStatus = "rgb(255, 217, 215)";
+
+                      return (
+                        <div
+                          key={idx}
+                          className={`${styles.taskItem} ${styles.taskDefault}`}
+                        >
+                          <div
+                            className={`${styles.statusIndicator}`}
+                            style={{ backgroundColor: bgColorStatus }}
+                          >
+                            {task.completed ? (
+                              <div className={styles.completedStatus}>
+                                <FaRegCheckCircle
+                                  className={styles.statusIcon}
+                                />
+                                <span>Completed</span>
+                              </div>
+                            ) : isOverdue(task) ? (
+                              <div className={styles.overdueStatus}>
+                                <FaExclamationCircle
+                                  className={styles.statusIcon}
+                                />
+                                <span>Deadline Over</span>
+                              </div>
+                            ) : (
+                              <div className={styles.pendingStatus}>
+                                <FaClock className={styles.statusIcon} />
+                                <span>Pending</span>
+                              </div>
+                            )}
+                          </div>
+                          <div>
+                            <h3>{task.title}</h3>
+                            <p>{task.category}</p>
+                            <p>Deadline: {task.deadline}</p>
+                            <p>{task.description}</p>
+                          </div>
+
+                          <div className={styles.taskActions}>
+                            <FaEdit
+                              className={styles.iconBtn}
+                              title="Edit"
+                              onClick={() => {
+                                setIsEditMode(true);
+                                setEditTaskIndex(idx);
+                                setTaskTitle(task.title);
+                                setSelectedCategory(task.category);
+                                setTaskDeadline(task.deadline);
+                                setTaskDescription(task.description);
+                                setShowPopup(true);
+                              }}
+                            />
+                            <FaTrash
+                              className={styles.iconBtn}
+                              title="Delete"
+                              onClick={() => handleDelete(idx)}
+                            />
+                            <FaStar
+                              className={`${styles.iconBtn} ${
+                                task.isStarred ? styles.starred : ""
+                              }`}
+                              title={
+                                task.isStarred ? "Unstar Task" : "Star Task"
+                              }
+                              onClick={() => toggleStar(idx, task.category)}
+                            />
+
+                            <FaCheckCircle
+                              className={`${styles.iconBtn} ${
+                                task.completed ? styles.completed : ""
+                              }`}
+                              title={
+                                task.completed
+                                  ? "Mark as Incomplete"
+                                  : "Mark as Done"
+                              }
+                              onClick={() => toggleComplete(idx)}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                </ul>
+              )}
+            </>
+          )}
+
+          {activeView === "Urgent Tasks" && (
+            <>
+              <h2 className={styles.taskListTitle}>Urgent Tasks</h2>
+              {tasks.filter((task) => task.priority === "high").length === 0 ? (
+                <p>No urgent tasks right now!</p>
+              ) : (
+                <ul className={styles.taskList}>
+                  {tasks
+                    .filter(
+                      (task) =>
+                        task.priority === "high" && task.category !== "Events"
+                    )
                     .map((task, idx) => {
                       let bgColorStatus = "rgb(218, 218, 218)";
                       if (task.completed) bgColorStatus = "rgb(192, 255, 192)";
@@ -714,7 +823,7 @@ const Dashboard = () => {
             />
 
             {/* Priority Dropdown */}
-            {!activeCategory === "Events" && (
+            {activeCategory !== "Events" && (
               <select
                 className={styles.popupInput}
                 value={taskPriority}
