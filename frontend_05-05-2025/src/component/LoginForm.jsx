@@ -33,12 +33,12 @@ const LoginForm = () => {
     event.preventDefault();
     if (email === "" || password === "") {
       console.log("email and password is mandatory");
+      return;
     }
     const loginpayload = {
       email: email,
       password: password,
     };
-    console.log(loginpayload);
     try {
       const response = await fetch(`${SERVER_URL}/auth/login`, {
         method: "POST",
@@ -46,16 +46,12 @@ const LoginForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(loginpayload),
+        credentials: "include" // Important for cookie-based refresh token
       });
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         console.log("successfully logged in", data.access_token);
-
-        setCookie("token", data.access_token, {
-          path: "/",
-          maxAge: 7 * 24 * 60 * 60,
-        });
+        localStorage.setItem("accessToken", data.access_token); // <-- Store in localStorage
         navigate("/dashboard");
       } else {
         console.log("unable to login");
@@ -64,6 +60,7 @@ const LoginForm = () => {
       console.error(err);
     }
   };
+  
 
   const handleLoginSuccess = (credentialResponse) => {
     console.log("Login Success", credentialResponse);
@@ -78,7 +75,6 @@ const LoginForm = () => {
     const googlepayload = {
       token: credential,
     };
-    console.log(googlepayload);
     try {
       const response = await fetch(`${SERVER_URL}/auth/google-auth`, {
         method: "POST",
@@ -86,13 +82,12 @@ const LoginForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(googlepayload),
+        credentials: "include" // for cookie-based refresh
       });
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         console.log("successfully logged in using google", data.access_token);
-
-        setCookie("token", data.access_token);
+        localStorage.setItem("accessToken", data.access_token); // <-- Store in localStorage
         navigate("/dashboard");
       } else {
         console.log("unable to login using google");
@@ -101,6 +96,7 @@ const LoginForm = () => {
       console.error(err);
     }
   };
+  
 
   return (
     <div className={styles.appContainer}>

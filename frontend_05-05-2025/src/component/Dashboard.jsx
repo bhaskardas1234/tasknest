@@ -79,9 +79,9 @@ import Theme from "./Theme";
 // }
 
 export async function fetchWithAutoRefresh(url, options = {}) {
-  const accessToken = cookie.load("token");
+  const accessToken = localStorage.getItem("accessToken");
   console.log(url, options);
-  console.log(accessToken);
+  console.log(accessToken, "dkfkdjkfjdjfdjfjdj");
   // Set headers (merge existing headers)
   const headers = {
     ...(options.headers || {}),
@@ -107,6 +107,7 @@ export async function fetchWithAutoRefresh(url, options = {}) {
     // Try to refresh access token using refresh token (stored in cookie)
     const refreshRes = await fetch(`${SERVER_URL}/refresh`, {
       method: "POST",
+      Authorization: `Bearer ${accessToken}`,
       credentials: "include", // Important: send refresh cookie
     });
 
@@ -115,7 +116,7 @@ export async function fetchWithAutoRefresh(url, options = {}) {
       const newAccessToken = data.access_token;
 
       // Save new access token
-      localStorage.setItem("access_token", newAccessToken);
+      cookie.save("token", newAccessToken, { path: "/" });
 
       // Retry original request with new token
       const retryHeaders = {
@@ -133,13 +134,66 @@ export async function fetchWithAutoRefresh(url, options = {}) {
       return response;
     } else {
       // Refresh failed - user needs to login again
-      localStorage.removeItem("access_token");
+
       throw new Error("Session expired. Please log in again.");
     }
   }
 
   return response;
 }
+const refreshAccessToken = async () => {
+  const res = await fetch("http://localhost:8000/refresh", {
+    method: "POST",
+    credentials: "include",  // Required for sending HttpOnly cookies
+  });
+
+  const data = await res.json();
+
+  if (res.ok && data.access_token) {
+    localStorage.setItem("access_token", data.access_token);
+    return true;
+  }
+
+  return false;
+};
+const authFetch = async (url, method = "GET", body = null) => {
+  const token = localStorage.getItem("accessToken");
+
+ 
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`, // use access token here
+  };
+
+  const options = {
+    method,
+    headers,
+    credentials: "include",  // <-- important for cookie-based refresh!
+  };
+
+  if (body) {
+    options.body = JSON.stringify(body);
+  }
+
+  const response = await fetch(url, options);
+
+  if (response.status === 401) {
+    // Token might be expired → try refreshing
+    const refreshed = await refreshAccessToken();
+    if (refreshed) {
+      // Retry original request after refresh
+      return authFetch(url, method, body);
+    }
+    else{
+      //  there will be the logout functionlity local storage cleare and logout function call to the backendautomatically
+    }
+  }
+
+  return response.json();
+};
+
+
+
 
 const SideNav = ({
   isCollapsed,
@@ -326,14 +380,13 @@ const Dashboard = () => {
   }, [categories]);
 
   const getAllTasks = async () => {
-    try {
-      const response = await fetchWithAutoRefresh(
-        `${SERVER_URL}/tasks/grouped-by-category`
-      );
+    const accessToken = cookie.load("token");
+    try{
+      const res = authFetch(`${SERVER_URL}/tasks/grouped-by-category`);
       const data = await res.json();
-      console.log(data);
+      console.log(data,"huu uaahh");
       setTotalTaskList(data);
-      if (response.ok) {
+      if (res.ok) {
         console.log("tasks fetched successfully");
       } else {
         console.log("unable to fetch");
@@ -345,16 +398,10 @@ const Dashboard = () => {
 
   const getAllCategories = async () => {
     try {
-      console.log(cookies.token);
-      const response = await fetchWithAutoRefresh(`${SERVER_URL}/categories`);
-      const data = await res.json();
-      console.log(data.categories);
+      // console.log(cookies.token);
+      const data = await authFetch(`${SERVER_URL}/categories`);
       setCategories(data.categories);
-      if (response.ok) {
-        console.log("categories fetched successfully");
-      } else {
-        console.log("unable to fetch");
-      }
+      
     } catch (err) {
       console.error(err);
     }
@@ -371,15 +418,8 @@ const Dashboard = () => {
       category_name: categoryToAdd,
     };
     try {
-      const res = await fetchWithAutoRefresh(`${SERVER_URL}/category`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${cookies.token}`,
-        },
-        body: JSON.stringify(categorypayload),
-      });
-      const data = await res.json();
+      const data= await authFetch(`${SERVER_URL}/category`,"POST",categorypayload);
+    
       // try {
       //   const response = await fetch(`${SERVER_URL}/category`, {
       //     method: "POST",
@@ -390,19 +430,12 @@ const Dashboard = () => {
       //     body: JSON.stringify(categorypayload),
       //   });
       //   const data = await response.json();
-      console.log(data);
-      if (response.ok) {
-        console.log("category added successfully");
+     
         getAllCategories();
         setShowCategoryPopup(false);
         setNewCategoryType("");
         setCustomCategory("");
-      } else {
-        console.log("unable to add");
-        setShowCategoryPopup(false);
-        setNewCategoryType("");
-        setCustomCategory("");
-      }
+      
     } catch (err) {
       console.error(err);
       setShowCategoryPopup(false);
@@ -429,42 +462,18 @@ const Dashboard = () => {
       category_id: categoryId,
     };
 
-    console.log(cookies.token);
+    
     try {
-      const res = await fetchWithAutoRefresh(
-        `${SERVER_URL}/task/${editTaskClicked.task_id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${cookies.token}`,
-          },
-          body: JSON.stringify(editTask),
-        }
-      );
-      const data = await res.json();
-      // try {
-      //   const response = await fetch(
-      //     `${SERVER_URL}/task/${editTaskClicked.task_id}`,
-      //     {
-      //       method: "PUT",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //         Authorization: `Bearer ${cookies.token}`,
-      //       },
-      //       body: JSON.stringify(editTask),
-      //     }
-      //   );
-      //   const data = await response.json();
-      console.log(data);
-      if (response.ok) {
-        console.log("task edited successfully");
+      const data = await authFetch(
+        `${SERVER_URL}/task/${editTaskClicked.task_id}`,"PUT",editTask)
+       ;
+      
+      
+      
+      
         getAllTasks();
         setShowPopup(false);
-      } else {
-        console.log("unable to edit");
-        setShowPopup(false);
-      }
+      
     } catch (err) {
       console.error(err);
       setShowPopup(false);
@@ -491,15 +500,8 @@ const Dashboard = () => {
 
     console.log(cookies.token);
     try {
-      const res = await fetchWithAutoRefresh(`${SERVER_URL}/task`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${cookies.token}`,
-        },
-        body: JSON.stringify(newTask),
-      });
-      const data = await res.json();
+      const data = await authFetch(`${SERVER_URL}/task`,"POST" ,newTask);
+     
       // try {
       //   const response = await fetch(`${SERVER_URL}/task`, {
       //     method: "POST",
@@ -511,12 +513,10 @@ const Dashboard = () => {
       //   });
       //   const data = await response.json();
       console.log(data);
-      if (response.ok) {
+     
         console.log("task added successfully");
         getAllTasks();
-      } else {
-        console.log("unable to add");
-      }
+      
     } catch (err) {
       console.error(err);
     }
@@ -550,15 +550,8 @@ const Dashboard = () => {
       setTasks(updatedTasks);
     }
     try {
-      const res = await fetchWithAutoRefresh(`${SERVER_URL}/task/${taskId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${cookies.token}`,
-        },
-        body: JSON.stringify(newTask),
-      });
-      const data = await res.json();
+      const data = await authFetch(`${SERVER_URL}/task/${taskId}`,"DELETE");
+      
       // try {
       //   const response = await fetch(`${SERVER_URL}/task/${taskId}`, {
       //     method: "DELETE",
@@ -568,13 +561,9 @@ const Dashboard = () => {
       //     },
       //   });
       //   const data = await response.json();
-      console.log(data);
-      if (response.ok) {
-        console.log("deleted successfully");
+     
         getAllTasks();
-      } else {
-        console.log("unable to delete");
-      }
+      
     } catch (err) {
       console.error(err);
     }
@@ -601,18 +590,10 @@ const Dashboard = () => {
       starred: !currentstarredstatus,
     };
     try {
-      const res = await fetchWithAutoRefresh(
-        `${SERVER_URL}/task/${taskId}/star`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${cookies.token}`,
-          },
-          body: JSON.stringify(starPayload),
-        }
-      );
-      const data = await res.json();
+      const data= await authFetch(
+        `${SERVER_URL}/task/${taskId}/star`,"PATCH",starPayload);
+       
+     
       // try {
       //   const response = await fetch(`${SERVER_URL}/task/${taskId}/star`, {
       //     method: "PATCH",
@@ -623,12 +604,7 @@ const Dashboard = () => {
       //     body: JSON.stringify(starPayload),
       //   });
       //   const data = await response.json();
-      console.log(data);
-      if (response.ok) {
-        console.log("starred successfully");
-      } else {
-        console.log("unable to star");
-      }
+      
     } catch (err) {
       console.error(err);
     }
@@ -665,18 +641,10 @@ const Dashboard = () => {
       status: currentstatus,
     };
     try {
-      const res = await fetchWithAutoRefresh(
-        `${SERVER_URL}/task/${taskId}/status`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${cookies.token}`,
-          },
-          body: JSON.stringify(statusPayload),
-        }
-      );
-      const data = await res.json();
+      const data = await authFetch(
+        `${SERVER_URL}/task/${taskId}/status`,"PATCH",statusPayload);
+       
+     
       // try {
       //   const response = await fetch(`${SERVER_URL}/task/${taskId}/status`, {
       //     method: "PATCH",
@@ -687,12 +655,7 @@ const Dashboard = () => {
       //     body: JSON.stringify(statusPayload),
       //   });
       //   const data = await response.json();
-      console.log(data);
-      if (response.ok) {
-        console.log("status updated successfully");
-      } else {
-        console.log("unable to update");
-      }
+      
     } catch (err) {
       console.error(err);
     }

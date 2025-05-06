@@ -22,7 +22,7 @@ app.add_middleware(
 # JWT settings
 class Settings(BaseModel):
     authjwt_secret_key: str = "task_nest_1234567890"
-    authjwt_token_location: set = {"cookies"}
+    authjwt_token_location: set = {"headers", "cookies"}
     authjwt_cookie_secure: bool = False  # True in production with HTTPS
     authjwt_cookie_csrf_protect: bool = False  # Optional
     authjwt_access_token_expires: int = 60 * 15  # 15 minutes
